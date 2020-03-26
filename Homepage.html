@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crypto Coins Live</title>
+    <!-- JS -->
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- TOGGLE -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <!-- AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<style>
+    body {
+        background-attachment: fixed;
+        background-image: url('img/main.png');
+        background-size: cover;
+
+    }
+
+    #SearchInput {
+        width: 120px;
+    }
+
+    .icon {
+        display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+        .icon {
+            display: block;
+            float: left;
+        }
+
+        .navbar-nav .nav-item {
+            display: none;
+        }
+
+        .navbar-nav a.icon {
+            display: block;
+            cursor: pointer;
+        }
+
+    }
+
+
+    .newNav {
+        background-color: whitesmoke;
+
+    }
+
+    .newNav .nav-item {
+        display: block;
+    }
+
+    .newNav .nav-link {
+        color: black;
+        opacity: 0.5;
+        text-decoration: none;
+    }
+
+    .newNav .nav-link:hover {
+        color: black;
+        opacity: 1;
+        text-decoration: none;
+    }
+</style>
+
+<body>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">About Me</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Hello,</h3>
+                    <p> My name is Joy Ron and this is my Ajax/Jquerry Project.</p>
+                    <p> Here you can find some live information about <b>Crypto Coins</b>.</p>
+                    <p> Enjoy!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Beggining of HTML -->
+    <div class="jumbotron jumbotron-fluid sticky-top" style="height: 200px;">
+
+        <div class="header" style="font-size:50px; text-align:center;">Crypto Coins</div>
+        <p style="font-size:15px; text-align:center;"> Real Live Information</p>
+
+        <div class="row no-gutters mt-3">
+            <div class="col- col-xl-12">
+                <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                    <a class="icon navbar-brand float-left">
+                        <img id="imgButton"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1024px-Bitcoin.svg.png"
+                            width="40" height="40" alt="">
+                    </a>
+
+                    <ul class="navbar-nav mr-auto" id="myTopnav">
+                        <div class="nav-item">
+                            <a class="nav-link" href="#" onclick="GoToHomePage()">Home</a>
+                        </div>
+                        <div class="nav-item ml-5">
+                            <a class="nav-link" href="#" onclick="LoadLiveReport()">Live Reports</a>
+                        </div>
+                        <div class="nav-item ml-5">
+                            <!-- Button trigger modal -->
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                                About
+                            </a>
+                        </div>
+                    </ul>
+                    <form class="SearchArea form-inline my-2 my-sm-0 float-right">
+                        <input class="form-control mr-sm-2" id="SearchInput" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button"
+                            onclick="GetCoinBySearchINP()">Search</button>
+                    </form>
+                </nav>
+            </div>
+        </div>
+
+        <div class="newNav" style="height: 150px;">
+            <div class="row ml-5">
+                <ul class="navbar-nav mt-2" id="myTopnav">
+                    <div class="nav-item">
+                        <a class="nav-link" href="#" onclick="GoToHomePage()">Home</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-link" href="#" onclick="LoadLiveReport()">Live Reports</a>
+                    </div>
+                    <div class="nav-item">
+                        <!-- Button trigger modal -->
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                            About
+                        </a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Here I will print the Spinner / Live report chart / Searched coin / all of the Coins -->
+    <div class="container d-flex justify-content-center" id="charContainerId">
+        <div class="row no-gutters d-flex justify-content-center" id="PrintHere" style="margin-top: 80px;">
+            <div class="spinner-border mt-5" role="status" style="width: 150px; height: 150px;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+
+                        </h5>
+                    </div>
+                    <div class="modal-Replace">
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" id="AlertClose" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(".newNav").hide();
+        $(document).ready(function () {
+            $("#imgButton").click(function () {
+                $(".newNav").slideToggle("fast");
+            });
+        });
+
+    </script>
+
+    <script src="js.js"></script>
+    <script src="SearchAndNavBar.js"></script>
+    <script src="LiveReports.js"></script>
+
+</body>
+
+</html>
